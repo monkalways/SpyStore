@@ -51,22 +51,22 @@ namespace SpyStore.DAL.Tests.RepoTests
         //    var ex = Assert.Throws<DbUpdateConcurrencyException>(() => _repo.Delete(category.Id, category.TimeStamp));
         //}
 
-        [Fact]
-        public void ShouldThrowRetryExeptionWhenCantConnect()
-        {
-            var contextOptionsBuilder = new DbContextOptionsBuilder<StoreContext>();
-            var connectionString =
-                @"Server=(localdb)\mssqllocaldb;Database=Foo;Trusted_Connection=True;MultipleActiveResultSets=true;";
-            //contextOptionsBuilder.UseSqlServer(connectionString, 
-            //    o => o.EnableRetryOnFailure(2,new TimeSpan(0,0,0,0,100),new Collection<int>{ -2146232060 }));
+        //[Fact]
+        //public void ShouldThrowRetryExeptionWhenCantConnect()
+        //{
+        //    var contextOptionsBuilder = new DbContextOptionsBuilder<StoreContext>();
+        //    var connectionString =
+        //        @"Server=(localdb)\mssqllocaldb;Database=Foo;Trusted_Connection=True;MultipleActiveResultSets=true;";
+        //    //contextOptionsBuilder.UseSqlServer(connectionString, 
+        //    //    o => o.EnableRetryOnFailure(2,new TimeSpan(0,0,0,0,100),new Collection<int>{ -2146232060 }));
 
-            contextOptionsBuilder.UseSqlServer(connectionString,
-                o => o.ExecutionStrategy(c => new MyConnectionStragey(c, 5, new TimeSpan(0, 0, 0, 0, 30))));
-            var repo = new CategoryRepo(contextOptionsBuilder.Options);
-            //repo.Context.
-            var category = new Category { CategoryName = "Foo" };
-            var ex = Assert.Throws<RetryLimitExceededException>(() => repo.Add(category));
-        }
+        //    contextOptionsBuilder.UseSqlServer(connectionString,
+        //        o => o.ExecutionStrategy(c => new MyConnectionStragey(c, 5, new TimeSpan(0, 0, 0, 0, 30))));
+        //    var repo = new CategoryRepo(contextOptionsBuilder.Options);
+        //    //repo.Context.
+        //    var category = new Category { CategoryName = "Foo" };
+        //    var ex = Assert.Throws<RetryLimitExceededException>(() => repo.Add(category));
+        //}
 
     }
 }
