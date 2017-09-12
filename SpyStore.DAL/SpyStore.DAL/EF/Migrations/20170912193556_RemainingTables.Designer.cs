@@ -8,9 +8,10 @@ using SpyStore.DAL.EF;
 namespace SpyStore.DAL.EF.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20170912193556_RemainingTables")]
+    partial class RemainingTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -73,11 +74,6 @@ namespace SpyStore.DAL.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("getdate()");
-
-                    b.Property<decimal?>("OrderTotal")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("money")
-                        .HasComputedColumnSql("Store.GetOrderTotal([Id])");
 
                     b.Property<DateTime>("ShipDate")
                         .ValueGeneratedOnAdd()

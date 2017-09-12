@@ -41,43 +41,43 @@ namespace SpyStore.DAL.Repos.Base
 
         public virtual IEnumerable<T> GetRange(int skip, int take) => GetRange(Table, skip, take);
 
-        public int Add(T entity, bool persist = true)
+        public virtual int Add(T entity, bool persist = true)
         {
             Table.Add(entity);
             return persist ? SaveChanges() : 0;
         }
 
-        public int AddRange(IEnumerable<T> entities, bool persist = true)
+        public virtual int AddRange(IEnumerable<T> entities, bool persist = true)
         {
             Table.AddRange(entities);
             return persist ? SaveChanges() : 0;
         }
 
-        public int Update(T entity, bool persist = true)
+        public virtual int Update(T entity, bool persist = true)
         {
             Table.Update(entity);
             return persist ? SaveChanges() : 0;
         }
 
-        public int UpdateRange(IEnumerable<T> entities, bool persist = true)
+        public virtual int UpdateRange(IEnumerable<T> entities, bool persist = true)
         {
             Table.UpdateRange(entities);
             return persist ? SaveChanges() : 0;
         }
 
-        public int Delete(T entity, bool persist = true)
+        public virtual int Delete(T entity, bool persist = true)
         {
             Table.Remove(entity);
             return persist ? SaveChanges() : 0;
         }
 
-        public int DeleteRange(IEnumerable<T> entities, bool persist = true)
+        public virtual int DeleteRange(IEnumerable<T> entities, bool persist = true)
         {
             Table.RemoveRange(entities);
             return persist ? SaveChanges() : 0;
         }
 
-        public int Delete(int id, byte[] timeStamp, bool persist = true)
+        public virtual int Delete(int id, byte[] timeStamp, bool persist = true)
         {
             var entry = GetEntryFromChangeTracker(id);
             if (entry != null)

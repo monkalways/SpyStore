@@ -12,5 +12,8 @@ namespace SpyStore.Models.Entities
     {
         [DataType(DataType.Text), MaxLength(50)]
         public string CategoryName { get; set; }
+
+        [InverseProperty(nameof(Product.Category))]
+        public List<Product> Products { get; set; } = new List<Product>();
     }
 }
