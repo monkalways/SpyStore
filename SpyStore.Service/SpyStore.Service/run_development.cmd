@@ -1,0 +1,2 @@
+set aspnetcore_environment=development
+dotnet run
