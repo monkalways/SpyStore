@@ -8,7 +8,7 @@ namespace SpyStore.DAL.EF
 {
     public class StoreContext : DbContext
     {
-        private readonly string _connectionString = @"Server=(localdb)\mssqllocaldb;Database=SpyStore;Trusted_Connection=True;MultipleActiveResultSets=true;";
+        private readonly string _connectionString = @"Server=(localdb)\ProjectsV13;Database=SpyStore;Trusted_Connection=True;MultipleActiveResultSets=true;";
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
