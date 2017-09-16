@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SpyStore.MVC.Authentication;
+using SpyStore.MVC.Configuration;
+using SpyStore.MVC.Filters;
+using SpyStore.MVC.WebServiceAccess;
+using SpyStore.MVC.WebServiceAccess.Base;
 
 namespace SpyStore.MVC
 {
@@ -28,9 +33,18 @@ namespace SpyStore.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc(config =>
+            {
+                config.Filters.Add(new AuthActionFilter(services.BuildServiceProvider().GetService<IAuthHelper>()));
+            });
 
             services.AddSingleton(_ => Configuration);
+
+            services.AddSingleton<IWebServiceLocator, WebServiceLocator>();
+
+            services.AddSingleton<IWebApiCalls, WebApiCalls>();
+
+            services.AddSingleton<IAuthHelper, AuthHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
